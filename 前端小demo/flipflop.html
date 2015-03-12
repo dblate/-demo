@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<!--注： HOVER只能对其子元素有效-->
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>FLIPFLOP</title>
+		<style>
+/*----------------------------------------------------------
+	得去掉BODY的默认MARGIN和PADDING，否则不能正确获取元素的坐标位置
+--------------------------------------------------------------*/
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: "Droid Sans Fallback";
+			}
+			.image-flipflop {
+				width: 500px;
+				height: 300px;
+				position: relative;
+				top: 150px;
+				margin: 0 auto;
+				perspective: 800px;
+				-webkit-perspective: 800px;
+			}
+
+			.image-flipflop .image-layer {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 1;
+
+				transition: 0.6s;
+				-webkit-transition: 0.6s;
+				-moz-transition: 0.6s;
+			}
+
+			.image-flipflop #button-layer {
+				position: absolute;
+				left: 50px;
+				bottom: 100px;
+				height: 100px;
+				z-index: 11;
+				opacity: 0;
+
+				transition: 0.6s;
+				-webkit-transition: 0.6s;
+				-moz-transition: 0.6s;
+
+				transform: rotateX(70deg);
+				-webkit-transform: rotateX(70deg);
+				-moz-transform: rotateX(70deg);
+			}
+			.image-flipflop #button-layer a {
+				position: relative;
+				text-decoration: none;
+				display: inline-block;
+				color: #fff;
+				text-align: center;
+				padding: 10px;
+				width: 80px;
+				margin: 25px 12px;
+				border-radius: 6px;
+			}
+	/*--------为每个BUTTON添加背景颜色--------*/
+			#google {
+				position: relative;
+				left: 0px;
+				background-color: #3B5998;
+			}
+			.twitter {
+				background-color: #00ACED;
+			}
+			.facebook {
+				background-color: #D34836;
+			}
+	/*------------------动画效果--------------*/
+			.image-flipflop:hover .image-layer {
+				transform: rotateX(70deg);
+				-webkit-transform: rotateX(70deg);
+				-moz-transform: rotateX(70deg);
+			}
+			.image-flipflop:hover #button-layer {
+				opacity: 1;
+				transform: rotateX(0deg) translateY(-70px);
+				-moz-transform: rotateX(0deg) translateY(-70px);
+				-webkit-transform: rotateX(0deg) translateY(-70px);
+			}
+
+		</style>
+	</head>
+<body>
+	<div class="image-flipflop">
+		<div id="button-layer">
+			<a href="#" class="google" id="google" onclick="START1()" style="position: relative;left: 0px;top:0px;width: 80px;height: 22px;">GOOGLE</a>
+			<a href="#" class="twitter" id="twitter" onclick="START2()"style="position: relative;left: 0px;top: 0px;width: 80px;height: 22px;">TWITTER</a>
+			<a href="#" class="facebook" id="facebook" onclick="START3()" style="position: relative;left: 0px;top: 0px;width: 80px;height: 22px;">FACEBOOK</a>
+		</div>
+		<div class="image-layer">
+			<img src="images/tree.jpg" height="300" width="500">
+		</div>
+	</div>
+	<script src="JS/flipflop.js" type="text/javascript"></script>
+<!--
+	<script>
+		function getX(e){
+			var x= 0;
+			while(e){
+				x += e.offsetLeft;
+				e = e.offsetParent;
+			}
+			return x;
+		}
+		function getY(e){
+			var y =0;
+			while(e){
+				y += e.offsetTop;
+				e = e.offsetParent;
+			}
+			return y;
+		}
+	var button = document.getElementsByClassName("image-flipflop");
+	var button_x = getY(button[0]);
+	console.log(button_x);
+	var BUTTON = document.getElementById("button-layer").children;
+	if(BUTTON[0]){
+		alert(getX(BUTTON[0]));
+	}
+	var a = button[0].children;
+	var b = a[0].children;
+	var href = document.getElementById("twitter");
+	if(href.previousSibling){
+	}
+	</script>
+-->
+</body>
+
+</html>
