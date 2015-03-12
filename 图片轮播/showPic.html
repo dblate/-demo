@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>showPic</title>
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="JS/jquery.js"></script>
+		<script type="text/javascript" src="JS/slidePic.js"></script>
+		<style type="text/css">
+			.clearfix:after {
+				content: " ";
+				display: block;
+				height: 0;
+				visibility: hidden;
+				clear: both;
+			}
+			.white {
+				background-color: white;
+			}
+			.yellow {
+				background-color: yellow;
+			}
+			ul {
+				margin: 0; 
+				padding: 0;
+			}
+			a {
+				text-decoration: none;
+			}
+			#gallery {
+				position: relative;
+				width: 400px;
+				height: 400px;
+				margin: 0 auto;
+			}
+			#next_btn {
+				display: block;
+			}
+			#pre_btn {
+				display: block;
+			}
+			#altContent {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				z-index: 11;
+				margin: 0px;
+				font-size: 14px;
+				line-height: 34px;
+				padding-left: 5px;
+				color: #fff;
+			}
+			#count {
+				position: absolute;
+				bottom: 0;
+				z-index: 10;
+				width: 100%;
+				background-color: #000;
+				opacity: 0.5;
+			}
+			#count li {
+				display: block;
+				float: left;
+				width: 25px;
+				text-align: center;
+				border: 1px solid black;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+			#count li:first-child {
+				margin-left: 220px;
+			}
+			#count li a{
+				display: block;
+				color: rgba(28,227,66,1);
+				padding: 5px;
+			}
+			li {
+				list-style: none;
+			}
+
+		</style>
+		<script type="text/javascript">
+/*			$(document).ready(function(){
+			//she zhi li de yang shi 
+				$("li").each(function(){
+					$(this).css({
+						"position": "absolute",
+						"left": 0,
+						"zIndex": 6
+		})
+	})
+//kaishi dong hua
+			function movePic3(){
+				$("#show3").animate({left:"+=800"},2000);
+			}
+			function movePic2(){
+				$("#show2").animate({top:"+=400"},1000);
+				$("#show2").queue(function(){
+					$("#show3").animate({left:"+=400"},1000)
+							   .animate({top:"+=400"},1000);
+					$(this).dequeue();
+					});
+			}
+			$("#show1").animate({left:"+=400"},1000,movePic2);
+/*			$("#show1").queue(function(){	
+*				$("#show2").animate({top:"+=400"},1000);
+*				$(this).dequeue();
+*				});
+
+//			$("#show2").animate({top:"+=400"},1000);
+});
+*/
+	</script>
+	</head>
+<body>
+	<div id="placeholder" style="width:400px;height:400px;margin-left:500px;position:relative;overflow:hidden">  
+	<ul id="gallery">
+		<li><a href="images/bg1.png"><img src="images/bg1.png" alt="copyRight&copy; yuhui_1" height="400" width="400" /></a></li>
+		<li><a href="images/bg2.jpg"><img src="images/bg2.jpg" alt="copyRight&copy; yuhui_2" height="400" width="400" /></a></li>
+		<li><a href="images/bg3.jpg"><img src="images/bg3.jpg" alt="copyRight&copy; yuhui_3" height="400" width="400" /></a></li>
+		<li><a href="images/bg4.jpg"><img src="images/bg4.jpg" alt="copyRight&copy; yuhui_4" height="400" width="400" /></a></li>
+	</ul>
+	<ul id="count" class="clearfix">
+		<li><a href="images/bg1.png">1</a></li>
+		<li><a href="images/bg2.jpg">2</a></li>
+		<li><a href="images/bg3.jpg">3</a></li>
+		<li><a href="images/bg4.jpg">4</a></li>
+		<li><a id="next_btn" href=""><img  src="images/next_btn.jpg" height="60" width="60"/></a></li><!--会在JS中规定大小-->
+		<li><a id="pre_btn"  href=""><img  src="images/pre_btn.jpg" height="60" width="60"/></a></li>
+	</ul>
+	<p id="altContent"></p>
+	</div>
+</body>
+</html>
