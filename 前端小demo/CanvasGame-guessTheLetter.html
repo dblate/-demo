@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas</title>
+	<script>
+	    window.addEventListener('load', eventWindowLoaded, false);
+	    function eventWindowLoaded() {
+	    	canvasApp();
+	    }
+	    // 浏览器是否支持canvas
+	    function canvasSupport() {
+	    	return !!document.createElement('canvas').getContext;
+	    }
+
+	    // debug.console
+	    var Debugger = function (){};
+	    Debugger.console = function (message) {
+	    	try {
+	    		console.log(message);
+	    	} catch (exception) {
+	    		return;
+	    	}
+	    }
+
+	   	function canvasApp() {
+	   		if(!canvasSupport){
+	   			return;
+	   		} else {
+			   	//猜字母
+			   	var theCanvas = document.getElementById('canvas');
+			   	var context   = theCanvas.getContext('2d');
+			   	var createImageData = document.getElementById('createImageData');
+			   	createImageData.addEventListener('click', createImageDataPressed, false);
+			   	var guesses = 0;
+			   	var message = 'Guess The Letter From a(lower) to z(higher)';
+			   	var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+			   	'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+			   	var today = new Date();
+			   	var letterToGuess = '';
+			   	var higherOrLower = '';
+			   	var letterGuessed;
+			   	var gameOver = false;
+
+	   		}
+
+	   		initGame();
+	   		// drawScreen();
+
+	   		// function drawScreen() {
+	   		// 	context.fillStyle = '#aaa';
+	   		// 	context.fillRect(0,0,200,200);
+
+
+	   	function initGame () {
+	   		var letterIndex = Math.floor(Math.random() * letters.length);
+	   		letterToGuess = letters[letterIndex];
+	   		Debugger.console('LetterToGuess is: ' + letterToGuess);
+	   		guesses = 0;
+	   		letterGuessed = [];
+	   		gameOver = false;
+	   		window.addEventListener('keydown',eventKeyPressed,true);
+	   		drawScreen();
+	   	}
+
+	   	function eventKeyPressed(e) {
+	   		if (!gameOver) {
+	   			var letterPressed = String.fromCharCode(e.keyCode);
+	   			letterPressed = letterPressed.toLowerCase();
+	   			guesses++;	
+	   			letterGuessed.push(letterPressed);
+
+	   			if (letterPressed == letterToGuess) {
+	   				gameOver = true;
+	   			} else {
+	   				letterIndex = letters.indexOf(letterToGuess);
+	   				guessIndex  = letters.indexOf(letterPressed);
+	   				if (guessIndex < 0) {
+	   					higherOrLower = 'That is not a letter!';
+	   				} else if (guessIndex > letterIndex) {
+	   					higherOrLower = 'Lower';
+	   				} else {
+	   					higherOrLower = 'Higher';
+	   				}
+	   			}
+
+	   			drawScreen();
+	   		}
+	   	}
+
+	   	function drawScreen() {
+	   		// 背景
+	   		context.fillStyle = '#ffffaa';
+	   		context.fillRect(0, 0, 500, 300);
+
+	   		// 边框
+	   		context.strokeStyle = '#000';
+	   		context.strokeRect(5, 5, 490, 290);
+
+	   		context.textBaseline = 'top';
+
+	   		// 日期
+	   		context.fillStyle = '#000';
+	   		context.font = '10px Sans-Serif';
+	   		context.fillText(today, 150, 10);
+
+	   		// 消息
+	   		context.fillStyle = '#FF0000';
+	   		context.font = '14px';
+	   		context.fillText(message, 125, 30);
+
+	   		// 猜测的次数
+	   		context.fillStyle = '#109910';
+	   		context.font = '16px';
+	   		context.fillText('You have guessed ' + guesses + 'times.', 180, 50);
+
+	   		// 显示higher 或 lower
+	   		context.fillStyle = '#000';
+	   		context.fillText('high or lower: ' + higherOrLower, 150, 125);
+
+	   		// 猜过的字母
+	   		context.fillStyle = '#ff0000';
+	   		context.fillText('Letter guessed: ' + letterGuessed.toString(), 10, 260);
+
+	   		if (gameOver) {
+	   			context.fillStyle = '#ff0000';
+	   			context.font = '40px _sans';
+	   			context.fillText('You win the Game!', 90, 180);
+	   		}
+	   	}
+	   		// 	context.fillStyle = '#000';
+	   		// 	context.font = '30px _sans';
+	   		// 	context.textBaseline = 'top';
+	   		// 	context.fillText('Canvas!',0,0);	
+	   		// }
+	   		// 
+	   	function createImageDataPressed() {
+	   		window.open(theCanvas.toDataURL(), 'canvasImage', 'left=0,top=0,width=' + theCanvas.width + ',height=' + theCanvas.height + ',toolbar=0,resizable=0');
+	   	}
+	}
+
+
+	</script>
+</head>
+<body>
+	<div style="position: absolute; top: 50px; left: 50px;">
+		<canvas id="canvas" width="500" height="500">
+			Your browser does not support canvas;
+		</canvas>
+	</div>
+	<form>
+		<input type='button' id='createImageData' value='Export Canvas Image'></input>
+	</form>
+</body>
+</html>
